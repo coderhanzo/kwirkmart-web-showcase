@@ -1,4 +1,4 @@
-import { ShoppingCart, Star, Bell, CreditCard, MapPin, Download, QrCode } from "lucide-react";
+import { ShoppingCart, Star, Bell, CreditCard, MapPin, QrCode } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useState, useEffect } from "react";
@@ -84,10 +84,10 @@ const MobileAppSection = () => {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
           {/* App Demo - Mobile First */}
-          <div className="w-full lg:w-1/2 flex justify-center">
-            <div className="glass-card p-6 md:p-8 w-full max-w-sm">
+          <div className="w-full lg:w-1/2 flex justify-center relative">
+            <div className="glass-card p-6 md:p-8 w-full max-w-sm relative">
               {/* Animated Phone */}
               <div className="relative w-full aspect-[9/16] max-w-[280px] mx-auto mb-6 md:mb-8">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-glow rounded-3xl p-1 shadow-2xl">
@@ -160,28 +160,28 @@ const MobileAppSection = () => {
               </div>
             </div>
 
-            {/* Floating Rating */}
-            <div className="hidden md:block absolute -top-4 -right-4 glass-card p-4 animate-float">
+            {/* Floating Rating - Fixed positioning */}
+            <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 glass-card p-3 md:p-4 animate-float z-10">
               <div className="flex items-center space-x-2">
-                <Star className="h-5 w-5 text-primary fill-current" />
+                <Star className="h-4 w-4 md:h-5 md:w-5 text-primary fill-current" />
                 <div>
-                  <div className="font-bold text-primary">4.9</div>
-                  <div className="text-xs text-muted-foreground">Rating</div>
+                  <div className="font-bold text-primary text-sm md:text-base">4.9</div>
+                  <div className="text-xs text-muted-foreground hidden md:block">Rating</div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Features List */}
-          <div className="w-full lg:w-1/2 space-y-4 md:space-y-6">
-            <div className="glass-card p-4 md:p-6 mb-4 md:mb-8">
+          <div className="w-full lg:w-1/2 space-y-4 md:space-y-6 mt-8 lg:mt-0">
+            <div className="glass-card p-4 md:p-6">
               <h3 className="text-xl md:text-2xl font-bold mb-2">Why Choose Our App?</h3>
               <p className="text-muted-foreground text-sm md:text-base">
                 Everything you need for convenient grocery shopping, right in your pocket.
               </p>
             </div>
             
-            <div className="grid gap-4 md:gap-6">
+            <div className="space-y-4 md:space-y-6">
               {features.map((feature, index) => {
                 const FeatureIcon = feature.icon;
                 return (

@@ -73,7 +73,7 @@ const HeroSection = () => {
 
           {/* Hero Image */}
           <div className="relative">
-            <div className="glass-card p-4 animate-float">
+            <div className="glass-card p-4 animate-float relative z-10">
               <img 
                 src={heroImage} 
                 alt="Kwikmart modern supermarket storefront" 
@@ -81,15 +81,15 @@ const HeroSection = () => {
               />
             </div>
             
-            {/* Floating elements */}
-            <div className="absolute -top-4 -right-4 glass-card p-3 animate-glow">
+            {/* Floating elements - Fixed positioning */}
+            <div className="absolute top-2 right-2 md:-top-4 md:-right-4 glass-card p-3 animate-glow z-20">
               <div className="flex items-center space-x-2">
-                <Star className="h-5 w-5 text-primary fill-current" />
+                <Star className="h-4 w-4 md:h-5 md:w-5 text-primary fill-current" />
                 <span className="text-sm font-bold text-primary">4.9</span>
               </div>
             </div>
             
-            <div className="absolute -bottom-4 -left-4 glass-card p-4">
+            <div className="absolute bottom-2 left-2 md:-bottom-4 md:-left-4 glass-card p-3 md:p-4 z-20">
               <div className="text-sm font-medium text-foreground">Fresh Daily</div>
               <div className="text-xs text-muted-foreground">Quality Guaranteed</div>
             </div>
