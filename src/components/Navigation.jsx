@@ -80,20 +80,20 @@ const Navigation = () => {
             <div className="flex flex-col space-y-4">
               <a 
                 href="/about" 
-                className="text-foreground/80 hover:text-primary transition-colors font-medium py-2"
+                className="text-foreground/80 hover:text-primary transition-colors font-medium py-3 px-4" // Added px-4 for horizontal padding
                 onClick={() => setIsOpen(false)}
               >
                 About Us
               </a>
               <a 
                 href="#contact" 
-                className="text-foreground/80 hover:text-primary transition-colors font-medium py-2"
+                className="text-foreground/80 hover:text-primary transition-colors font-medium py-3 px-4" // Added px-4 for horizontal padding
                 onClick={() => setIsOpen(false)}
               >
                 Contact
               </a>
               <Button 
-                className="flex items-center space-x-2 justify-start bg-green-600 hover:bg-green-700 text-white"
+                className="flex items-center space-x-2 justify-start bg-green-600 hover:bg-green-700 text-white py-3 px-4 mx-4" // Added px-4 and mx-4 for padding
                 onClick={() => {
                   window.open('https://wa.me/233248926993', '_blank');
                   setIsOpen(false);
