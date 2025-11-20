@@ -107,9 +107,9 @@ const BranchesSection = () => {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA - Fixed positioning */}
         <div className="text-center mt-12 md:mt-16">
-          <div className="glass-card inline-block p-6 md:p-8 max-w-2xl w-full mx-4">
+          <div className="glass-card p-6 md:p-8 max-w-2xl w-full mx-auto">
             <h3 className="text-xl md:text-2xl font-bold mb-3">Want Kwikmart closer to you?</h3>
             <p className="text-muted-foreground mb-4 md:mb-6 text-sm md:text-base max-w-md mx-auto">
               We're mapping out future communities now. Share your neighborhood and help us choose the next opening.

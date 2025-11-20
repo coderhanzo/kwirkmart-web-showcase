@@ -46,7 +46,7 @@ const MobileAppSection = () => {
       url: "https://apps.apple.com/",
       description: "Download on the",
       subtitle: "App Store",
-      bg: "bg-black"
+      bg: "bg-black hover:bg-black/90"
     },
     {
       name: "Google Play", 
@@ -54,7 +54,7 @@ const MobileAppSection = () => {
       url: "https://play.google.com/",
       description: "Get it on",
       subtitle: "Google Play",
-      bg: "bg-green-600"
+      bg: "bg-green-600 hover:bg-green-700"
     }
   ];
 
@@ -132,19 +132,21 @@ const MobileAppSection = () => {
                 </div>
               </div>
 
-              {/* Download Buttons */}
+              {/* Download Buttons - Fixed */}
               <div className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                   {appStores.map((store, index) => (
                     <Button
                       key={index}
-                      className={`${store.bg} text-white rounded-xl md:rounded-2xl p-3 md:p-4 hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm md:text-base`}
+                      className={`${store.bg} text-white rounded-xl md:rounded-2xl p-3 md:p-4 hover:shadow-xl transition-all duration-300 flex-1 min-h-[60px] md:min-h-[70px]`}
                       onClick={() => window.open(store.url, '_blank')}
                     >
-                      <div className="text-left w-full">
-                        <div className="text-xl md:text-2xl mb-1">{store.icon}</div>
-                        <div className="text-xs md:text-sm">{store.description}</div>
-                        <div className="text-sm md:text-base font-bold">{store.subtitle}</div>
+                      <div className="flex items-center space-x-2 md:space-x-3 w-full">
+                        <span className="text-2xl md:text-3xl">{store.icon}</span>
+                        <div className="text-left flex-1">
+                          <div className="text-xs md:text-sm text-white/90">{store.description}</div>
+                          <div className="text-sm md:text-base font-bold">{store.subtitle}</div>
+                        </div>
                       </div>
                     </Button>
                   ))}
