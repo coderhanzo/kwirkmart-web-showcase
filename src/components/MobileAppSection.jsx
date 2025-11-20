@@ -58,6 +58,9 @@ const MobileAppSection = () => {
     }
   ];
 
+  const activeFeature = features[currentFeature] ?? features[0];
+  const ActiveFeatureIcon = activeFeature?.icon ?? ShoppingCart;
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFeature((prev) => (prev + 1) % features.length);
@@ -100,12 +103,12 @@ const MobileAppSection = () => {
 
                     {/* Feature Display */}
                     <div className="text-center space-y-2">
-                      <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${features[currentFeature].color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
-                        <features[currentFeature].icon className="h-5 w-5 md:h-6 md:w-6 text-white" />
+                      <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${activeFeature.color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
+                        <ActiveFeatureIcon className="h-5 w-5 md:h-6 md:w-6 text-white" />
                       </div>
-                      <h4 className="font-semibold text-foreground text-sm md:text-base">{features[currentFeature].title}</h4>
+                      <h4 className="font-semibold text-foreground text-sm md:text-base">{activeFeature.title}</h4>
                       <p className="text-muted-foreground text-xs px-2 md:px-4">
-                        {features[currentFeature].description}
+                        {activeFeature.description}
                       </p>
                     </div>
 
@@ -177,34 +180,37 @@ const MobileAppSection = () => {
             </div>
             
             <div className="grid gap-4 md:gap-6">
-              {features.map((feature, index) => (
-                <Card 
-                  key={index}
-                  className={`glass-card hover-lift p-4 md:p-6 group cursor-pointer transition-all duration-300 ${
-                    index === currentFeature ? 'ring-2 ring-primary/20' : ''
-                  }`}
-                  onMouseEnter={() => setCurrentFeature(index)}
-                >
-                  <div className="flex items-start space-x-3 md:space-x-4">
-                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
-                      <feature.icon className="h-5 w-5 md:h-6 md:w-6 text-white" />
+              {features.map((feature, index) => {
+                const FeatureIcon = feature.icon;
+                return (
+                  <Card 
+                    key={index}
+                    className={`glass-card hover-lift p-4 md:p-6 group cursor-pointer transition-all duration-300 ${
+                      index === currentFeature ? 'ring-2 ring-primary/20' : ''
+                    }`}
+                    onMouseEnter={() => setCurrentFeature(index)}
+                  >
+                    <div className="flex items-start space-x-3 md:space-x-4">
+                      <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                        <FeatureIcon className="h-5 w-5 md:h-6 md:w-6 text-white" />
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold mb-1 md:mb-2 group-hover:text-primary transition-colors text-sm md:text-base">
+                          {feature.title}
+                        </h4>
+                        <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                      
+                      {index === currentFeature && (
+                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse flex-shrink-0 mt-2" />
+                      )}
                     </div>
-                    
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold mb-1 md:mb-2 group-hover:text-primary transition-colors text-sm md:text-base">
-                        {feature.title}
-                      </h4>
-                      <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </div>
-                    
-                    {index === currentFeature && (
-                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse flex-shrink-0 mt-2" />
-                    )}
-                  </div>
-                </Card>
-              ))}
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>
