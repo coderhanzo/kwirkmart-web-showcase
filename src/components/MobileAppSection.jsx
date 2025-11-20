@@ -58,8 +58,8 @@ const MobileAppSection = () => {
     }
   ];
 
-  const activeFeature = features[currentFeature] ?? features[0];
-  const ActiveFeatureIcon = activeFeature?.icon ?? ShoppingCart;
+  // Get current feature icon component
+  const CurrentFeatureIcon = features[currentFeature].icon;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -103,12 +103,14 @@ const MobileAppSection = () => {
 
                     {/* Feature Display */}
                     <div className="text-center space-y-2">
-                      <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${activeFeature.color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
-                        <ActiveFeatureIcon className="h-5 w-5 md:h-6 md:w-6 text-white" />
+                      <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${features[currentFeature].color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
+                        <CurrentFeatureIcon className="h-5 w-5 md:h-6 md:w-6 text-white" />
                       </div>
-                      <h4 className="font-semibold text-foreground text-sm md:text-base">{activeFeature.title}</h4>
+                      <h4 className="font-semibold text-foreground text-sm md:text-base">
+                        {features[currentFeature].title}
+                      </h4>
                       <p className="text-muted-foreground text-xs px-2 md:px-4">
-                        {activeFeature.description}
+                        {features[currentFeature].description}
                       </p>
                     </div>
 
