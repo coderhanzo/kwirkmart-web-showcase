@@ -90,7 +90,7 @@ const AboutUs = () => {
                 <div className="text-sm text-muted-foreground">Accra Branches</div>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-bold gradient-text-primary">8+</div>
+                <div className="text-3xl font-bold gradient-text-primary">10+</div>
                 <div className="text-sm text-muted-foreground">Years Serving</div>
               </div>
               <div className="space-y-2">

@@ -1,5 +1,4 @@
-import { ShoppingCart, Star, Bell, CreditCard, MapPin, QrCode } from "lucide-react";
-import { Button } from "./ui/button";
+import { ShoppingCart, Star, Bell, CreditCard, MapPin } from "lucide-react";
 import { Card } from "./ui/card";
 import { useState, useEffect } from "react";
 
@@ -39,26 +38,6 @@ const MobileAppSection = () => {
     }
   ];
 
-  const appStores = [
-    {
-      name: "App Store",
-      icon: "🍎",
-      url: "https://apps.apple.com/",
-      description: "Download on the",
-      subtitle: "App Store",
-      bg: "bg-black hover:bg-black/90"
-    },
-    {
-      name: "Google Play", 
-      icon: "🤖",
-      url: "https://play.google.com/",
-      description: "Get it on",
-      subtitle: "Google Play",
-      bg: "bg-green-600 hover:bg-green-700"
-    }
-  ];
-
-  // Get current feature icon component
   const CurrentFeatureIcon = features[currentFeature].icon;
 
   useEffect(() => {
@@ -85,14 +64,11 @@ const MobileAppSection = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-          {/* App Demo - Mobile First */}
           <div className="w-full lg:w-1/2 flex justify-center relative">
             <div className="glass-card p-6 md:p-8 w-full max-w-sm relative">
-              {/* Animated Phone */}
               <div className="relative w-full aspect-[9/16] max-w-[280px] mx-auto mb-6 md:mb-8">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-glow rounded-3xl p-1 shadow-2xl">
                   <div className="w-full h-full bg-background rounded-3xl p-4 md:p-6 flex flex-col justify-between">
-                    {/* App Header */}
                     <div className="text-center">
                       <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-lg">
                         <ShoppingCart className="h-6 w-6 md:h-8 md:w-8 text-primary-foreground" />
@@ -101,7 +77,6 @@ const MobileAppSection = () => {
                       <p className="text-muted-foreground text-xs md:text-sm">Your Shopping Partner</p>
                     </div>
 
-                    {/* Feature Display */}
                     <div className="text-center space-y-2">
                       <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${features[currentFeature].color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
                         <CurrentFeatureIcon className="h-5 w-5 md:h-6 md:w-6 text-white" />
@@ -114,7 +89,6 @@ const MobileAppSection = () => {
                       </p>
                     </div>
 
-                    {/* App Footer */}
                     <div className="flex justify-center space-x-1 md:space-x-2">
                       {features.map((_, index) => (
                         <button
@@ -122,8 +96,8 @@ const MobileAppSection = () => {
                           onClick={() => setCurrentFeature(index)}
                           className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all ${
                             index === currentFeature
-                              ? 'bg-primary scale-125'
-                              : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                              ? "bg-primary scale-125"
+                              : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
                           }`}
                         />
                       ))}
@@ -132,37 +106,34 @@ const MobileAppSection = () => {
                 </div>
               </div>
 
-              {/* Download Buttons - Fixed */}
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                  {appStores.map((store, index) => (
-                    <Button
-                      key={index}
-                      className={`${store.bg} text-white rounded-xl md:rounded-2xl p-3 md:p-4 hover:shadow-xl transition-all duration-300 flex-1 min-h-[60px] md:min-h-[70px]`}
-                      onClick={() => window.open(store.url, '_blank')}
-                    >
-                      <div className="flex items-center space-x-2 md:space-x-3 w-full">
-                        <span className="text-2xl md:text-3xl">{store.icon}</span>
-                        <div className="text-left flex-1">
-                          <div className="text-xs md:text-sm text-white/90">{store.description}</div>
-                          <div className="text-sm md:text-base font-bold">{store.subtitle}</div>
-                        </div>
-                      </div>
-                    </Button>
-                  ))}
+              {/* Replace your current app download section with this */}
+              <div className="flex w-full flex-col items-center space-y-4 text-center">
+                <p className="text-sm text-muted-foreground">Download our app</p>
+                <div className="flex w-full items-center justify-between">
+                  <a 
+                    href="/under-construction" 
+                    className="transition-transform hover:scale-105"
+                  >
+                    <img 
+                      src="/app-store.svg" 
+                      alt="Download on App Store" 
+                      className="h-10"
+                    />
+                  </a>
+                  <a 
+                    href="/under-construction" 
+                    className="transition-transform hover:scale-105"
+                  >
+                    <img 
+                      src="/google-play.svg" 
+                      alt="Get it on Google Play" 
+                      className="h-10"
+                    />
+                  </a>
                 </div>
-
-                {/* QR Code Option */}
-                <Card className="glass-card p-3 md:p-4 mt-4 md:mt-6">
-                  <div className="flex items-center justify-center space-x-2 md:space-x-3">
-                    <QrCode className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                    <span className="text-sm font-medium">Scan to download</span>
-                  </div>
-                </Card>
               </div>
             </div>
 
-            {/* Floating Rating - Fixed positioning */}
             <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 glass-card p-3 md:p-4 animate-float z-10">
               <div className="flex items-center space-x-2">
                 <Star className="h-4 w-4 md:h-5 md:w-5 text-primary fill-current" />
@@ -174,7 +145,6 @@ const MobileAppSection = () => {
             </div>
           </div>
 
-          {/* Features List */}
           <div className="w-full lg:w-1/2 space-y-4 md:space-y-6 mt-8 lg:mt-0">
             <div className="glass-card p-4 md:p-6">
               <h3 className="text-xl md:text-2xl font-bold mb-2">Why Choose Our App?</h3>
@@ -190,7 +160,7 @@ const MobileAppSection = () => {
                   <Card 
                     key={index}
                     className={`glass-card hover-lift p-4 md:p-6 group cursor-pointer transition-all duration-300 ${
-                      index === currentFeature ? 'ring-2 ring-primary/20' : ''
+                      index === currentFeature ? "ring-2 ring-primary/20" : ""
                     }`}
                     onMouseEnter={() => setCurrentFeature(index)}
                   >

@@ -26,14 +26,16 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
+            <a href="/">
             <img
               src="/kwirkmart.png"
               alt="Kwikmart logo"
-              className="h-10 w-10 object-contain"
+              className="h-20 w-20 object-contain"
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            </a>
+            {/* <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
               Kwikmart
-            </span>
+            </span> */}
           </div>
 
           {/* Desktop Navigation */}
