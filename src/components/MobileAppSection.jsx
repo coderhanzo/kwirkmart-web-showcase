@@ -111,7 +111,7 @@ const MobileAppSection = () => {
                 <p className="text-sm text-muted-foreground">Download our app</p>
                 <div className="flex w-full items-center justify-between">
                   <a 
-                    href="/under-construction" 
+                    href="https://apps.apple.com/gb/app/kwirkmart/id6752880752" 
                     className="transition-transform hover:scale-105"
                   >
                     <img 
