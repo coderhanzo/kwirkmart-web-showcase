@@ -45,10 +45,10 @@ const ContactSection = () => {
       question: "What are your delivery hours?",
       answer: "We offer delivery from 8 AM to 10 PM, 7 days a week. Same-day delivery available for orders placed before 2 PM."
     },
-    {
-      question: "Do you accept returns?",
-      answer: "Yes! We have a 30-day return policy for non-perishable items and immediate returns for damaged products."
-    },
+    // {
+    //   question: "Do you accept returns?",
+    //   answer: "Yes! We have a 30-day return policy for non-perishable items and immediate returns for damaged products."
+    // },
     {
       question: "How fresh are your products?",
       answer: "We receive fresh deliveries daily and guarantee freshness. All products have clear expiration dates."

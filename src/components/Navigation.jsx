@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X, Phone, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
+import OrderDialog from "./OrderDialog";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -79,14 +80,15 @@ const Navigation = () => {
                 Shop
               </Link>
             </Button>
-            <Button
-              size="sm"
-              className="rounded-full bg-green-600 text-white hover:bg-green-700"
-              onClick={() => window.open("https://wa.me/233248926993", "_blank")}
-            >
-              <Phone className="mr-1.5 h-4 w-4" />
-              Order Now
-            </Button>
+            <OrderDialog>
+              <Button
+                size="sm"
+                className="rounded-full bg-green-600 text-white hover:bg-green-700"
+              >
+                <Phone className="mr-1.5 h-4 w-4" />
+                Order Now
+              </Button>
+            </OrderDialog>
           </div>
 
           <div className="md:hidden">
@@ -134,16 +136,15 @@ const Navigation = () => {
                   </a>
                 )
               )}
-              <Button
-                className="mx-4 mt-3 justify-center bg-green-600 text-white hover:bg-green-700"
-                onClick={() => {
-                  window.open("https://wa.me/233248926993", "_blank");
-                  setIsOpen(false);
-                }}
-              >
-                <Phone className="mr-2 h-4 w-4" />
-                Order via WhatsApp
-              </Button>
+              <OrderDialog>
+                <Button
+                  className="mx-4 mt-3 justify-center bg-green-600 text-white hover:bg-green-700"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Phone className="mr-2 h-4 w-4" />
+                  Order Now
+                </Button>
+              </OrderDialog>
             </div>
           </div>
         )}
