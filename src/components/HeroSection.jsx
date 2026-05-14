@@ -1,4 +1,5 @@
-import { ArrowRight, Sparkles, Truck, Shield, Star } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Sparkles, Truck, Shield, Star, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
 import heroImage from "@/assets/kwikmart-hero.jpg";
 
@@ -6,92 +7,110 @@ const HeroSection = () => {
   const features = [
     { icon: Truck, text: "Free Delivery", color: "text-primary" },
     { icon: Star, text: "Fresh Quality", color: "text-yellow-500" },
-    { icon: Shield, text: "Safe Shopping", color: "text-green-500" }
+    { icon: Shield, text: "Safe Shopping", color: "text-green-600" },
   ];
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-32 md:pt-24 lg:pt-20 relative overflow-hidden">
-      {/* Background Elements */}
+    <section
+      id="home"
+      className="relative flex min-h-[92vh] items-center overflow-hidden px-4 pt-28 sm:pt-32"
+    >
       <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute top-1/4 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" />
-      
-      <div className="container mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full border border-glass-border">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Modern Grocery Experience</span>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                Your Modern
-                <span className="block gradient-text-primary">
-                  Shopping
-                </span>
-                <span className="block">Experience</span>
-              </h1>
+      <div className="absolute inset-0 bg-dot-grid opacity-60" />
+      <div className="absolute -top-32 left-10 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+      <div className="absolute -bottom-32 right-10 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
+
+      <div className="container relative z-10 mx-auto">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="space-y-7">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
+              <Sparkles className="h-3.5 w-3.5" />
+              Modern grocery experience
             </div>
-            
-            <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-              Discover fresh groceries, quality products, and exceptional service at Kwikmart.
-              Where convenience meets innovation.
+
+            <h1 className="text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
+              Everyday essentials,
+              <span className="block gradient-text-primary">delivered fresh.</span>
+            </h1>
+
+            <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
+              Shop thousands of products from Kwikmart's Accra stores. Browse,
+              search, and order on WhatsApp — we'll handle the rest.
             </p>
 
-            {/* Features */}
-            <div className="flex flex-wrap gap-6">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center space-x-3 text-muted-foreground">
-                  <feature.icon className={`h-5 w-5 ${feature.color}`} />
-                  <span className="font-medium">{feature.text}</span>
+            <div className="flex flex-wrap gap-5 text-sm text-muted-foreground sm:text-base">
+              {features.map((f, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <f.icon className={`h-5 w-5 ${f.color}`} />
+                  <span className="font-medium">{f.text}</span>
                 </div>
               ))}
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                className="bg-gradient-primary text-primary-foreground rounded-2xl px-8 py-4 text-lg hover-lift group shadow-primary hover:shadow-xl transition-all duration-300"
-                onClick={() => document.getElementById('branches')?.scrollIntoView({ behavior: 'smooth' })}
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button
+                asChild
+                size="lg"
+                className="group rounded-full bg-primary px-7 text-base text-primary-foreground shadow-primary hover:bg-primary/90"
               >
-                Explore Stores
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"/>
+                <Link to="/products">
+                  <ShoppingBag className="mr-2 h-5 w-5" />
+                  Shop products
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
-              
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="glass-button text-lg px-8 py-4 border-primary/20 hover:border-primary/40 hover:shadow-primary transition-all duration-300"
-                onClick={() => document.getElementById('app')?.scrollIntoView({ behavior: 'smooth' })}
+              <Button
+                variant="outline"
+                size="lg"
+                className="rounded-full border-border/60 bg-background/60 px-7 text-base backdrop-blur"
+                onClick={() =>
+                  document.getElementById("branches")?.scrollIntoView({ behavior: "smooth" })
+                }
               >
-                Download App
+                Find a branch
               </Button>
+            </div>
+
+            <div className="flex items-center gap-6 pt-2 text-xs text-muted-foreground">
+              <div>
+                <p className="text-2xl font-bold text-foreground">2,700+</p>
+                <p>Products</p>
+              </div>
+              <div className="h-10 w-px bg-border" />
+              <div>
+                <p className="text-2xl font-bold text-foreground">2</p>
+                <p>Accra stores</p>
+              </div>
+              <div className="h-10 w-px bg-border" />
+              <div>
+                <p className="text-2xl font-bold text-foreground">8am – 10pm</p>
+                <p>Open daily</p>
+              </div>
             </div>
           </div>
 
-          {/* Hero Image */}
           <div className="relative">
-            <div className="glass-card p-4 animate-float relative z-10">
-              <img 
-                src={heroImage} 
-                alt="Kwikmart modern supermarket storefront" 
-                className="w-full h-auto rounded-2xl shadow-glass"
+            <div className="glass-card relative z-10 animate-float p-4">
+              <img
+                src={heroImage}
+                alt="Kwikmart modern supermarket storefront"
+                className="h-auto w-full rounded-2xl shadow-glass"
               />
             </div>
-            
-            {/* Floating elements - Fixed positioning */}
-            <div className="absolute top-2 right-2 md:-top-4 md:-right-4 glass-card p-3 animate-glow z-20">
-              <div className="flex items-center space-x-2">
-                <Star className="h-4 w-4 md:h-5 md:w-5 text-primary fill-current" />
-                <span className="text-sm font-bold text-primary">4.9</span>
+
+            <div className="absolute -top-3 right-2 z-20 rounded-2xl border border-border bg-background/95 px-3 py-2 shadow-lg sm:-top-5 sm:-right-5">
+              <div className="flex items-center gap-2">
+                <Star className="h-5 w-5 fill-primary text-primary" />
+                <div>
+                  <p className="text-sm font-bold leading-none">4.9</p>
+                  <p className="text-[10px] text-muted-foreground">Customer rating</p>
+                </div>
               </div>
             </div>
-            
-            <div className="absolute bottom-2 left-2 md:-bottom-4 md:-left-4 glass-card p-3 md:p-4 z-20">
-              <div className="text-sm font-medium text-foreground">Fresh Daily</div>
-              <div className="text-xs text-muted-foreground">Quality Guaranteed</div>
+
+            <div className="absolute -bottom-3 left-2 z-20 rounded-2xl border border-border bg-background/95 px-3 py-2.5 shadow-lg sm:-bottom-5 sm:-left-5">
+              <p className="text-sm font-semibold">Fresh Daily</p>
+              <p className="text-[10px] text-muted-foreground">Quality guaranteed</p>
             </div>
           </div>
         </div>

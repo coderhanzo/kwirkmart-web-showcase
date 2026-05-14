@@ -1,74 +1,100 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Menu, X, Phone, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+
+const NAV_LINKS = [
+  { label: "Products", to: "/products", type: "route" },
+  { label: "About Us", to: "/about", type: "route" },
+  { label: "Branches", to: "/#branches", type: "hash" },
+  { label: "Contact", to: "/#contact", type: "hash" },
+];
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname, location.hash]);
+
+  const linkClass = ({ isActive }) =>
+    cn(
+      "text-sm font-medium transition-colors",
+      isActive ? "text-primary" : "text-foreground/75 hover:text-primary"
+    );
+
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled 
-        ? "bg-background/80 backdrop-blur-xl border-b border-border/40 shadow-sm" 
-        : "bg-transparent"
-    )}>
+    <nav
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        isScrolled
+          ? "border-b border-border/60 bg-background/80 shadow-sm backdrop-blur-xl"
+          : "bg-background/0"
+      )}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <a href="/">
+        <div className="flex h-16 items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
             <img
               src="/kwirkmart.png"
               alt="Kwikmart logo"
-              className="h-20 w-20 object-contain"
+              className="h-14 w-14 object-contain sm:h-16 sm:w-16"
             />
-            </a>
-            {/* <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Kwikmart
-            </span> */}
-          </div>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <a 
-              href="/about" 
-              className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm"
+          <div className="hidden items-center gap-6 md:flex">
+            {NAV_LINKS.map((link) =>
+              link.type === "route" ? (
+                <NavLink key={link.to} to={link.to} className={linkClass} end>
+                  {link.label}
+                </NavLink>
+              ) : (
+                <a
+                  key={link.to}
+                  href={link.to}
+                  className="text-sm font-medium text-foreground/75 transition-colors hover:text-primary"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="rounded-full border-primary/30 text-primary hover:border-primary hover:bg-primary/10"
             >
-              About Us
-            </a>
-            <a 
-              href="#contact" 
-              className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm"
+              <Link to="/products">
+                <ShoppingBag className="mr-1.5 h-4 w-4" />
+                Shop
+              </Link>
+            </Button>
+            <Button
+              size="sm"
+              className="rounded-full bg-green-600 text-white hover:bg-green-700"
+              onClick={() => window.open("https://wa.me/233248926993", "_blank")}
             >
-              Contact
-            </a>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="flex items-center space-x-2 text-green-600 hover:text-green-700 hover:bg-green-50"
-              onClick={() => window.open('https://wa.me/233248926993', '_blank')}
-            >
-              <Phone className="h-4 w-4" />
-              <span>Order Now</span>
+              <Phone className="mr-1.5 h-4 w-4" />
+              Order Now
             </Button>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => setIsOpen(!isOpen)}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen((v) => !v)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
               className="rounded-xl"
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -76,33 +102,47 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border/20 bg-background/95 backdrop-blur-lg">
-            <div className="flex flex-col space-y-4">
-              <a 
-                href="/about" 
-                className="text-foreground/80 hover:text-primary transition-colors font-medium py-3 px-4" // Added px-4 for horizontal padding
-                onClick={() => setIsOpen(false)}
-              >
-                About Us
-              </a>
-              <a 
-                href="#contact" 
-                className="text-foreground/80 hover:text-primary transition-colors font-medium py-3 px-4" // Added px-4 for horizontal padding
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </a>
-              <Button 
-                className="flex items-center space-x-2 justify-start bg-green-600 hover:bg-green-700 text-white py-3 px-4 mx-4" // Added px-4 and mx-4 for padding
+          <div className="border-t border-border/40 bg-background/95 py-4 backdrop-blur-lg md:hidden">
+            <div className="flex flex-col gap-1">
+              {NAV_LINKS.map((link) =>
+                link.type === "route" ? (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setIsOpen(false)}
+                    end
+                    className={({ isActive }) =>
+                      cn(
+                        "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+                        isActive
+                          ? "bg-primary/10 text-primary"
+                          : "text-foreground/80 hover:bg-muted hover:text-foreground"
+                      )
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ) : (
+                  <a
+                    key={link.to}
+                    href={link.to}
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-xl px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
+              <Button
+                className="mx-4 mt-3 justify-center bg-green-600 text-white hover:bg-green-700"
                 onClick={() => {
-                  window.open('https://wa.me/233248926993', '_blank');
+                  window.open("https://wa.me/233248926993", "_blank");
                   setIsOpen(false);
                 }}
               >
-                <Phone className="h-4 w-4" />
-                <span>Order via WhatsApp</span>
+                <Phone className="mr-2 h-4 w-4" />
+                Order via WhatsApp
               </Button>
             </div>
           </div>
